@@ -42,3 +42,8 @@ for diag, temp in temp_by_diag.items():
 
 import matplotlib.pyplot as plt
 
+# ===== ANALYSE PAR SEXE ET DIAGNOSTIC (Exercice 1) =====
+print(f"\n--- Nombre de patients par sexe et diagnostic ---")
+stats_sexe_diag = df.groupby(["sexe", "diagnostic"]).size()
+print(stats_sexe_diag)
+
