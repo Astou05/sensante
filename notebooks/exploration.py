@@ -42,22 +42,3 @@ for diag, temp in temp_by_diag.items():
 
     import matplotlib.pyplot as plt
 
-# --- Graphique 1 : Répartition des Diagnostics (Bar Chart) ---
-plt.figure(figsize=(10, 6))
-diag_counts.plot(kind='bar', color=['green', 'red', 'blue', 'orange'])
-plt.title('Répartition des Diagnostics - SénSanté')
-plt.xlabel('Maladies')
-plt.ylabel('Nombre de Patients')
-plt.xticks(rotation=45)
-plt.grid(axis='y', linestyle='--', alpha=0.7)
-plt.savefig('notebooks/repartition_diagnostics.png') # Sauvegarde l'image
-plt.show()
-
-# --- Graphique 2 : Température Moyenne par Diagnostic ---
-plt.figure(figsize=(10, 6))
-temp_by_diag.plot(kind='line', marker='o', color='darkred', linewidth=2)
-plt.title('Température Moyenne selon la Pathologie')
-plt.ylabel('Température (°C)')
-plt.grid(True)
-plt.savefig('notebooks/temperature_moyenne.png')
-plt.show()
