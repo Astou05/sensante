@@ -40,5 +40,5 @@ for diag, temp in temp_by_diag.items():
     print("Prochain lab : entrainer un modele ML")
     print(f"{'=' * 50}")
 
-    import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 

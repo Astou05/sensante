@@ -499,3 +499,4 @@ age,sexe,temperature,tension_sys,toux,fatigue,maux_tete,frissons,nausee,region,d
 46,M,37.2,12,0,0,0,0,0,Fatick,sain
 52,M,37.4,12,0,0,0,0,0,Tambacounda,sain
 44,F,41.0,12,1,1,1,0,1,Dakar,paludisme
+

@@ -11,6 +11,6 @@ grippe, typhoide) a partir des symptomes du patient.
 - `frontend/` : Interface web
 - `notebooks/` : Scripts d'exploration
 ## Auteur
-Moussa - DUT2 INFORMATIQUE- ESP/UCAD
+Astou Thiam - DUT2 INFORMATIQUE- ESP/UCAD
 ## Cours
 Integration de Modeles IA- Dr. El Hadji Bassirou TOURE
