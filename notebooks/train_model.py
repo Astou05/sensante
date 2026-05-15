@@ -168,3 +168,72 @@ print(f"\nProbabilités par classe :")
 for classe, proba in zip(model_loaded.classes_, probas):
     bar = '#' * int(proba * 20)
     print(f" {classe:12s} : {proba:6.1%} {bar}")
+
+importances = model.feature_importances_
+
+for name, imp in sorted(
+    zip(feature_cols, importances),
+    key=lambda x: x[1],
+    reverse=True
+):
+    print(f"{name:20s} : {imp:.3f}")    
+
+import warnings
+import joblib
+import pandas as pd
+
+# --- Exercice 2 : Test sur 3 profils variés ---
+
+# 1. Désactiver les avertissements de noms de colonnes pour nettoyer le terminal
+warnings.filterwarnings("ignore", category=UserWarning)
+
+# 2. Chargement des composants (si pas déjà fait plus haut)
+model_loaded = joblib.load("models/model.pkl")
+le_sexe_loaded = joblib.load("models/encoder_sexe.pkl")
+le_region_loaded = joblib.load("models/encoder_region.pkl")
+
+# 3. Dé nition des 3 patients fictifs (Correction : Thies -> Dakar)
+patients_tests = [
+    {
+        'nom': 'Patient 1',
+        'age': 19, 'sexe': 'M', 'temperature': 37.2, 'tension_sys': 120,
+        'toux': False, 'fatigue': False, 'maux_tete': False, 'region': 'Dakar'
+    },
+    {
+        'nom': 'Patient 2',
+        'age': 35, 'sexe': 'F', 'temperature': 40.1, 'tension_sys': 130,
+        'toux': False, 'fatigue': True, 'maux_tete': True, 'region': 'Saint-Louis'
+    },
+    {
+        'nom': 'Patient 3',
+        'age': 72, 'sexe': 'M', 'temperature': 38.5, 'tension_sys': 145,
+        'toux': True, 'fatigue': True, 'maux_tete': False, 'region': 'Dakar'
+    }
+]
+
+print(f"\n--- RÉSULTATS DES TESTS DE L'EXERCICE 2 ---")
+
+for p in patients_tests:
+    # Encodage des valeurs textuelles
+    sexe_enc = le_sexe_loaded.transform([p['sexe']])[0]
+    region_enc = le_region_loaded.transform([p['region']])[0]
+    
+    # Préparation du vecteur de caractéristiques
+    features = [
+        p['age'], 
+        sexe_enc, 
+        p['temperature'], 
+        p['tension_sys'], 
+        int(p['toux']), 
+        int(p['fatigue']), 
+        int(p['maux_tete']), 
+        region_enc
+    ]
+    # Prédiction et probabilité
+    diagnostic = model_loaded.predict([features])[0]
+    proba = model_loaded.predict_proba([features])[0].max()
+    
+    # Affichage propre
+    print(f"Profil: {p['nom']:22s} | Diagnostic: {diagnostic:10s} | Confiance: {proba:.1%}")
+
+
